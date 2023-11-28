@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using testTask1.Models;
 
 namespace testTask1.Data
 {
@@ -9,5 +10,6 @@ namespace testTask1.Data
             : base(options)
         {
         }
+        public DbSet<testTask1.Models.Footballer> Footballer { get; set; } = default!;
     }
 }
