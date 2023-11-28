@@ -48,6 +48,12 @@ namespace testTask1.Controllers
         // GET: Footballers/Create
         public IActionResult Create()
         {
+            List<string> TeamList = new List<string>();
+            foreach (var footballer in _context.Footballer)
+            {
+                TeamList.Add(footballer.TeamName);
+            }
+            ViewBag.TeamList = TeamList;
             return View();
         }
 
