@@ -2,9 +2,21 @@
 
 @{
     ViewData["Title"] = "Create";
-    
 }
-
+<script>
+    function CancelButton_OnClick() {
+        document.getElementById("TeamDropdown").style.display = "block";
+        document.getElementById("TeamNew").style.display = "none";
+        document.getElementById("inputField").disabled = true;
+        document.getElementById("dropdown").disabled = false;
+    }
+    function AddNewButton_OnClick() {
+        document.getElementById("TeamDropdown").style.display = "none";
+        document.getElementById("TeamNew").style.display = "block";
+        document.getElementById("inputField").disabled = false;
+        document.getElementById("dropdown").disabled = true;
+    }
+</script>
 <h1>Create</h1>
 
 <h4>Footballer</h4>
@@ -33,22 +45,23 @@
                 <input asp-for="Birthday" class="form-control" />
                 <span asp-validation-for="Birthday" class="text-danger"></span>
             </div>
-            <div class="form-group" id="TeamNew" style="visibility: hidden">
+            <div class="form-group" id="TeamNew" style="display: none">
                 <label asp-for="TeamName" class="control-label"></label>
-                <input  asp-for="TeamName" class="form-control" />
-                <input type="button" name="button" class="button1" value="Cancel" OnClick="AddNewButton_OnClick" runat="server" />
+                <input  asp-for="TeamName" class="form-control" id="inputField" />
+                <input type="button" name="button" class="button1" value="Cancel" OnClick="CancelButton_OnClick()" />
                 <span asp-validation-for="TeamName" class="text-danger"></span>
             </div>
             <div class="form-group" id="TeamDropdown">
-                @Html.DropDownList("TeamName", new SelectList(ViewBag.TeamList), "Select a team", new { @class = "form-control" })
-                <input type="button" name="button" class="button1" value="Add New" OnClick="CancelButton_OnClick" runat="server" />
+                <label asp-for="TeamName" class="control-label"></label>
+                @Html.DropDownList("TeamName", new SelectList(ViewBag.TeamList), "Select a team", new { @class = "form-control"  , @id="dropdown" })
+                <input type="button" name="button" class="button1" value="Add New" OnClick="AddNewButton_OnClick()" />
                 <span asp-validation-for="TeamName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Country" class="control-label"></label>
                 <!--<input asp-for="Country" class="form-control" />-->
                 @Html.DropDownList("Country", new SelectList(Country.CountryList), "Select a country", new
-                { @class = "form-control" })
+                { @class = "form-control"})
                 <span asp-validation-for="Country" class="text-danger"></span>
             </div>
             <div class="form-group">

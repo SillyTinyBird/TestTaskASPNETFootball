@@ -51,7 +51,10 @@ namespace testTask1.Controllers
             List<string> TeamList = new List<string>();
             foreach (var footballer in _context.Footballer)
             {
-                TeamList.Add(footballer.TeamName);
+                if (!TeamList.Contains(footballer.TeamName))
+                {
+                    TeamList.Add(footballer.TeamName);
+                }
             }
             ViewBag.TeamList = TeamList;
             return View();
@@ -86,6 +89,15 @@ namespace testTask1.Controllers
             {
                 return NotFound();
             }
+            List<string> TeamList = new List<string>();
+            foreach (var footballerItem in _context.Footballer)
+            {
+                if (!TeamList.Contains(footballerItem.TeamName))
+                {
+                    TeamList.Add(footballerItem.TeamName);
+                }
+            }
+            ViewBag.TeamList = TeamList;
             return View(footballer);
         }
 
